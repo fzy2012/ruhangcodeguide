@@ -1,0 +1,218 @@
+# 入行 365 代码指南 - 工具列表
+
+# ============ 编辑器 / IDE ============
+
+- id: cursor
+  name: Cursor
+  name_en: Cursor
+  description: 最流行的 AI 编程编辑器，基于 VS Code，内置强大的 AI 助手和 Agent 模式。
+  url: https://cursor.com
+  category: editor
+  is_free: false
+  tags: [编辑器, AI助手, Agent模式, 推荐]
+
+- id: windsurf
+  name: Windsurf
+  name_en: Windsurf
+  description: Codeium 出品的免费 AI 编辑器，功能类似 Cursor，适合预算有限的开发者。
+  url: https://windsurf.com
+  category: editor
+  is_free: true
+  tags: [编辑器, 免费, AI助手]
+
+- id: vscode-copilot
+  name: VS Code + GitHub Copilot
+  name_en: VS Code + GitHub Copilot
+  description: 微软官方方案，Copilot Agent 模式正在快速迭代中。
+  url: https://code.visualstudio.com/docs/copilot/setup
+  category: editor
+  is_free: false
+  tags: [编辑器, 微软, Copilot]
+
+- id: cline
+  name: Cline
+  name_en: Cline
+  description: VS Code 插件，支持多种 LLM 模型，开源免费。
+  url: https://cline.bot/
+  category: editor
+  is_free: true
+  tags: [编辑器, 插件, 开源]
+
+- id: amp
+  name: Amp
+  name_en: Amp
+  description: 支持多代理并行执行任务，适合复杂项目，但成本较高。
+  url: https://ampcode.com
+  category: editor
+  is_free: false
+  tags: [编辑器, 多代理, 高级]
+
+- id: kiro
+  name: Kiro
+  name_en: Kiro
+  description: AWS 出品的 AI 编辑器，与 AWS 服务深度集成。
+  url: https://kiro.dev
+  category: editor
+  is_free: false
+  tags: [编辑器, AWS]
+
+# ============ 命令行工具 ============
+
+- id: claude-code
+  name: Claude Code
+  name_en: Claude Code
+  description: Anthropic 官方命令行工具，强大但成本较高，每天可能花费 $50+。
+  url: https://github.com/anthropics/claude-code
+  category: cli
+  is_free: false
+  tags: [CLI, Anthropic, 高级]
+
+- id: aider
+  name: aider
+  name_en: aider
+  description: 开源 CLI 工具，支持多种 LLM，社区活跃。
+  url: https://aider.chat/
+  category: cli
+  is_free: true
+  tags: [CLI, 开源, 推荐]
+
+- id: gemini-cli
+  name: Gemini CLI
+  name_en: Gemini CLI
+  description: Google 官方命令行工具，使用 Gemini 模型。
+  url: https://github.com/google-gemini/gemini-cli
+  category: cli
+  is_free: true
+  tags: [CLI, Google, Gemini]
+
+- id: openai-codex
+  name: OpenAI Codex CLI
+  name_en: OpenAI Codex CLI
+  description: OpenAI 官方命令行工具。
+  url: https://github.com/openai/codex
+  category: cli
+  is_free: false
+  tags: [CLI, OpenAI]
+
+- id: codebuff
+  name: Codebuff
+  name_en: Codebuff
+  description: 专注于代码生成的 CLI 工具。
+  url: https://www.codebuff.com/
+  category: cli
+  is_free: false
+  tags: [CLI]
+
+# ============ Web 应用 ============
+
+- id: bolt
+  name: Bolt
+  name_en: Bolt
+  description: StackBlitz 出品的可视化 AI 编程平台，适合快速原型开发。
+  url: https://bolt.new
+  category: webapp
+  is_free: true
+  tags: [Web应用, 可视化, 原型, 推荐]
+
+- id: v0
+  name: v0
+  name_en: v0
+  description: Vercel 出品，擅长生成 React/Next.js 组件，设计感出色。
+  url: https://v0.dev
+  category: webapp
+  is_free: true
+  tags: [Web应用, React, Next.js, UI设计, 推荐]
+
+- id: replit
+  name: Replit
+  name_en: Replit
+  description: 在线 IDE + AI 编程，支持多种语言，有免费额度。
+  url: https://replit.com
+  category: webapp
+  is_free: true
+  tags: [Web应用, 在线IDE, 多语言]
+
+- id: lovable
+  name: Lovable
+  name_en: Lovable
+  description: 免费额度友好（每天 5 条消息），代码可导出到 GitHub。
+  url: https://lovable.dev
+  category: webapp
+  is_free: true
+  tags: [Web应用, 免费, GitHub导出]
+
+- id: firebase-studio
+  name: Firebase Studio
+  name_en: Firebase Studio
+  description: Google Firebase 集成的 AI 开发平台。
+  url: https://firebase.studio/
+  category: webapp
+  is_free: true
+  tags: [Web应用, Firebase, Google]
+
+# ============ 后台代理 ============
+
+- id: devin
+  name: Devin
+  name_en: Devin
+  description: 号称"第一个 AI 软件工程师"，可自主完成复杂任务。
+  url: https://devin.ai
+  category: agent
+  is_free: false
+  tags: [Agent, 自主开发, 高级]
+
+- id: openhands
+  name: OpenHands
+  name_en: OpenHands
+  description: 开源的 AI 编程代理，通过 Docker 部署，需自备 API Key。
+  url: https://github.com/All-Hands-AI/OpenHands
+  category: agent
+  is_free: true
+  tags: [Agent, 开源, Docker]
+
+- id: coderabbit
+  name: CodeRabbit
+  name_en: CodeRabbit
+  description: 自动代码审查工具，集成 GitHub PR 流程。
+  url: https://www.coderabbit.ai/
+  category: agent
+  is_free: false
+  tags: [Agent, 代码审查, GitHub]
+
+# ============ 辅助工具 ============
+
+- id: repomix
+  name: repomix
+  name_en: repomix
+  description: 将整个代码仓库打包成适合 AI 阅读的格式。
+  url: https://repomix.com/
+  category: helper
+  is_free: true
+  tags: [辅助工具, 代码打包, 开源]
+
+- id: specstory
+  name: Specstory
+  name_en: Specstory
+  description: AI 辅助生成产品规格文档。
+  url: https://specstory.com/
+  category: helper
+  is_free: false
+  tags: [辅助工具, PRD, 文档]
+
+- id: claude-task-master
+  name: Claude Task Master
+  name_en: Claude Task Master
+  description: 帮助管理和拆分复杂任务的工具。
+  url: https://github.com/eyaltoledano/claude-task-master
+  category: helper
+  is_free: true
+  tags: [辅助工具, 任务管理, 开源]
+
+- id: codeguide
+  name: CodeGuide
+  name_en: CodeGuide
+  description: 代码导航和文档生成工具。
+  url: https://www.codeguide.dev/
+  category: helper
+  is_free: false
+  tags: [辅助工具, 文档]

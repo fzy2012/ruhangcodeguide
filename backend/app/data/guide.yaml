@@ -1,0 +1,231 @@
+# 入行 365 代码指南 - 指南内容
+
+- id: introduction
+  title: 什么是 AI 编程
+  emoji: "🤖"
+  order: 1
+  summary: 了解 AI 编程和 Vibe Coding 的概念，以及它们如何改变我们编写代码的方式。
+  content: |
+    ## AI 编程与 Vibe Coding
+
+    **AI 编程**是利用 AI 模型（特别是大语言模型 LLM）来辅助生成代码的实践。无论是使用 Cursor 自动补全代码，还是让 AI Agent 完全为你编写代码，都属于 AI 编程的范畴。
+
+    **Vibe Coding** 则是 AI 编程的升级版——你不再关心生成的代码细节，只需要给出提示词，让 AI 完全为你编写代码。这个概念由 Andrej Karpathy 在 2025 年提出，正在帮助更多人实现"编程民主化"。
+
+    ### 两种使用方式
+
+    1. **AI 作为副驾驶**：你主导开发，AI 辅助提升效率
+       - 用 ChatGPT 头脑风暴
+       - 用 Cursor 自动补全代码和文档
+       - 自动化繁琐的编码工作
+
+    2. **AI 作为主驾驶**：AI 主导开发，你负责验收
+       - 开启 Cursor 的 Agent 模式
+       - 让 AI 全权负责代码生成
+       - 适合快速原型开发
+  subsections:
+    - id: why-learn
+      title: 为什么要学习 AI 编程
+      content: |
+        - 提升开发效率 10 倍以上
+        - 降低入门编程的门槛
+        - 减少重复性工作
+        - 专注于创意和架构设计
+
+- id: getting-started
+  title: 如何开始
+  emoji: "🚀"
+  order: 2
+  summary: 根据你的技术背景，选择最适合的入门工具和学习路径。
+  content: |
+    ## 选择你的入门工具
+
+    根据你的技术背景，选择不同的起点：
+
+    ### 零基础新手
+
+    推荐使用 Web 应用工具，无需安装任何软件：
+    - **v0** - Vercel 出品，擅长生成 React/Next.js 代码
+    - **Bolt** - 可视化编程，适合快速原型
+    - **Lovable** - 免费额度友好，代码可导出到 GitHub
+    - **Replit** - 在线 IDE，支持多种语言
+
+    ### 有编程基础
+
+    推荐安装本地编辑器获得更好体验：
+    - **Cursor** - 最流行的 AI 编辑器，$20/月
+    - **Windsurf** - 免费替代品，功能类似
+    - **VS Code + Copilot** - 微软官方方案
+
+    ### 终端高手
+
+    命令行工具提供更强大的控制能力：
+    - **Claude Code** - Anthropic 官方 CLI
+    - **aider** - 开源，支持多种 LLM
+    - **Gemini CLI** - Google 官方工具
+
+    > 💡 **推荐**：先从 Cursor 或 v0 开始，它们最容易上手且文档完善。
+  subsections:
+    - id: first-steps
+      title: 第一步做什么
+      content: |
+        1. 选择一个工具并完成安装/注册
+        2. 尝试让 AI 生成一个简单的 Hello World 程序
+        3. 理解基本的提示词结构
+        4. 查看生成的代码并尝试理解
+
+- id: prompting
+  title: 提示词技巧
+  emoji: "💬"
+  order: 3
+  summary: 学习如何编写高质量的提示词，让 AI 更好地理解你的需求。
+  content: |
+    ## 提示词最佳实践
+
+    好的提示词是成功的一半。以下是经过验证的技巧：
+
+    ### 核心原则
+
+    1. **不要一次性提出所有需求**
+       - 分步骤、分阶段描述
+       - 先让 AI 理解整体目标
+
+    2. **提供足够的细节**
+       - 技术栈偏好（Python/JavaScript）
+       - 目标用户群体
+       - 功能优先级
+
+    3. **使用结构化格式**
+       - Markdown 或 XML 标签
+       - 清晰的分节
+       - 代码示例
+
+    4. **拆分任务**
+       - 大任务分解为小任务
+       - 每个任务单独提示
+
+    ### 推荐工作流程
+
+    ```
+    1. 用 ChatGPT 4o/o3 讨论产品需求
+    2. 生成 PRD（产品需求文档）
+    3. 基于 PRD 生成任务列表
+    4. 逐个任务交给 AI 实现
+    5. 测试并迭代
+    ```
+  subsections:
+    - id: prd-template
+      title: PRD 模板
+      content: |
+        让 AI 按以下结构生成 PRD：
+        - 项目概述
+        - 核心需求
+        - 核心功能
+        - 用户流程
+        - 技术栈
+        - 实施计划
+
+- id: project-setup
+  title: 项目架构
+  emoji: "🏗️"
+  order: 4
+  summary: 学习如何组织你的 AI 编程项目，包括前后端分离、代码规范等。
+  content: |
+    ## 前端开发
+
+    现代 Web 开发框架众多，推荐选择：
+
+    - **Next.js** - 适合部署到 Vercel
+    - **Vanilla React + Router** - 可部署到任何平台
+    - **Remix** - 服务端渲染，路由清晰
+
+    > 💡 小技巧：先用 Lovable 生成项目骨架，导出到 GitHub，再用 Cursor 继续开发。
+
+    ## 后端开发
+
+    Web 工具对后端支持较弱，建议使用本地工具：
+
+    - **Python + FastAPI** - 简洁高效
+    - **Node.js + Express** - 与前端语言一致
+    - 重视测试，每个功能都写端到端测试
+
+    ## 项目结构
+
+    ```
+    my-project/
+    ├── frontend/     # 前端代码
+    ├── backend/      # 后端代码
+    └── docs/         # 文档
+        ├── specs.md  # 产品需求
+        └── tasks.md  # 任务列表
+    ```
+  subsections:
+    - id: best-practices
+      title: 最佳实践
+      content: |
+        - 前后端分离，各自独立仓库或文件夹
+        - 后端先用 mock 数据，完成后再对接前端
+        - 使用 MCP 工具让 AI 控制浏览器自动测试
+        - 保持代码规范，定期让 AI 重构
+
+- id: debugging
+  title: 调试与问题解决
+  emoji: "🐛"
+  order: 5
+  summary: 当 AI 生成的代码出现问题时，如何有效地调试和修复。
+  content: |
+    ## 常见问题处理
+
+    ### AI 陷入死循环
+
+    当 AI 反复尝试修复同一个错误时：
+    - 暂停当前对话
+    - 用不同的方式重新描述问题
+    - 尝试切换到其他 LLM 模型
+
+    ### 遇到 API 限流
+
+    - 注册多个 API 账号备用
+    - 使用 OpenRouter 聚合多个模型
+    - 调整请求频率
+
+    ### 代码质量问题
+
+    - 让 AI 编写测试用例
+    - 使用 TDD（测试驱动开发）
+    - 定期代码审查
+  subsections:
+    - id: error-handling
+      title: 错误处理策略
+      content: |
+        1. 复制完整的错误信息给 AI
+        2. 提供上下文（你正在做什么）
+        3. 让 AI 解释错误原因
+        4. 一步一步修复，不要一次性修改太多
+
+- id: advanced
+  title: 进阶技巧
+  emoji: "⚡"
+  order: 6
+  summary: 深入了解 MCP、A2A 等新技术，以及如何创建自己的 AI 编程代理。
+  content: |
+    ## MCP、SLOP 和 A2A
+
+    这些是新兴的 AI 工具协议：
+
+    - **MCP (Model Context Protocol)** - 让 AI 工具共享上下文
+    - **SLOP** - 简化的工具调用协议
+    - **A2A (Agent to Agent)** - 多代理协作框架
+
+    ## 创建你自己的 AI Agent
+
+    进阶玩家可以基于以下工具创建定制化的 AI 编程助手：
+    - Claude API + 自定义提示词
+    - LangChain / LangGraph
+    - AutoGPT 框架
+
+    ## 安全注意事项
+
+    - 不要在提示词中包含敏感信息
+    - 审查 AI 生成的代码，特别是涉及安全的部分
+    - 使用环境变量管理密钥
