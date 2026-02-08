@@ -524,7 +524,9 @@ function Footer() {
 }
 
 /* ─── Main Page ─── */
+// Cache buster: v3-rebuild-20260209
 export default function Home() {
+  console.log("[v0] Home page rendered - v3 rebuild")
   return (
     <div className="min-h-screen bg-background relative">
       <ParticleCanvas />
