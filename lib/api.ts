@@ -47,8 +47,10 @@ interface ApiResponse<T> {
 }
 
 async function fetchApi<T>(endpoint: string): Promise<T> {
+  const isServer = typeof window === "undefined"
   const res = await fetch(`${API_BASE}${endpoint}`, {
-    next: { revalidate: 300 },
+    ...(isServer ? { next: { revalidate: 300 } } : {}),
+    cache: isServer ? undefined : "no-store",
   })
   if (!res.ok) {
     throw new Error(`API error: ${res.status}`)

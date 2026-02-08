@@ -114,7 +114,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            {"2017-2025 Ruhang365. All rights reserved."}
+            {"2017-2026 Ruhang365. All rights reserved."}
           </p>
           <div className="flex items-center gap-4">
             <a
