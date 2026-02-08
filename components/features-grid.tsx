@@ -9,15 +9,8 @@ import {
   Zap,
   Users,
 } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
 
-interface Feature {
-  icon: LucideIcon
-  title: string
-  description: string
-}
-
-const features: Feature[] = [
+const features = [
   {
     icon: BookOpen,
     title: "系统化学习路径",
@@ -50,30 +43,7 @@ const features: Feature[] = [
   },
 ]
 
-function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
-  const ref = useScrollReveal()
-  const Icon = feature.icon
-
-  return (
-    <div
-      ref={ref}
-      style={{ transitionDelay: `${index * 100}ms` }}
-      className="card-glow group rounded-xl border border-border bg-card/50 p-6 transition-all"
-    >
-      <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-colors">
-        <Icon className="h-5 w-5 text-primary" />
-      </div>
-      <h3 className="text-sm font-semibold text-foreground mb-2">
-        {feature.title}
-      </h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        {feature.description}
-      </p>
-    </div>
-  )
-}
-
-export function FeaturesSection() {
+export function FeaturesGrid() {
   const sectionRef = useScrollReveal()
 
   return (
@@ -92,11 +62,50 @@ export function FeaturesSection() {
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((feature, i) => (
-            <FeatureCard key={feature.title} feature={feature} index={i} />
-          ))}
+          {features.map((feature, i) => {
+            const Icon = feature.icon
+            return (
+              <FeatureCard
+                key={feature.title}
+                icon={<Icon className="h-5 w-5 text-primary" />}
+                title={feature.title}
+                description={feature.description}
+                index={i}
+              />
+            )
+          })}
         </div>
       </div>
     </section>
+  )
+}
+
+function FeatureCard({
+  icon,
+  title,
+  description,
+  index,
+}: {
+  icon: React.ReactNode
+  title: string
+  description: string
+  index: number
+}) {
+  const ref = useScrollReveal()
+
+  return (
+    <div
+      ref={ref}
+      style={{ transitionDelay: `${index * 100}ms` }}
+      className="card-glow group rounded-xl border border-border bg-card/50 p-6 transition-all"
+    >
+      <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-colors">
+        {icon}
+      </div>
+      <h3 className="text-sm font-semibold text-foreground mb-2">{title}</h3>
+      <p className="text-sm text-muted-foreground leading-relaxed">
+        {description}
+      </p>
+    </div>
   )
 }

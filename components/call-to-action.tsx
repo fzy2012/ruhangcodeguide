@@ -3,7 +3,7 @@
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { ArrowRight } from "lucide-react"
 
-export function CtaSection() {
+export function CallToAction() {
   const ref = useScrollReveal()
 
   return (
