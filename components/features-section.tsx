@@ -9,8 +9,15 @@ import {
   Zap,
   Users,
 } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 
-const features = [
+interface Feature {
+  icon: LucideIcon
+  title: string
+  description: string
+}
+
+const features: Feature[] = [
   {
     icon: BookOpen,
     title: "系统化学习路径",
@@ -43,45 +50,9 @@ const features = [
   },
 ]
 
-export function FeaturesSection() {
-  const sectionRef = useScrollReveal()
-
-  return (
-    <section className="relative px-6 py-24 md:py-32" ref={sectionRef}>
-      <div className="mx-auto max-w-6xl">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <span className="inline-block text-xs font-medium text-primary border border-primary/20 bg-primary/5 px-3 py-1 rounded-full mb-4">
-            核心功能
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance">
-            你需要的，
-            <span className="gradient-text">这里都有</span>
-          </h2>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-pretty">
-            从学习路径到实战工具，为你的 AI 编程之旅提供全方位支持
-          </p>
-        </div>
-
-        {/* Feature grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((feature, i) => (
-            <FeatureCard key={feature.title} feature={feature} index={i} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function FeatureCard({
-  feature,
-  index,
-}: {
-  feature: (typeof features)[number]
-  index: number
-}) {
+function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
   const ref = useScrollReveal()
+  const Icon = feature.icon
 
   return (
     <div
@@ -90,7 +61,7 @@ function FeatureCard({
       className="card-glow group rounded-xl border border-border bg-card/50 p-6 transition-all"
     >
       <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-colors">
-        <feature.icon className="h-5 w-5 text-primary" />
+        <Icon className="h-5 w-5 text-primary" />
       </div>
       <h3 className="text-sm font-semibold text-foreground mb-2">
         {feature.title}
@@ -99,5 +70,33 @@ function FeatureCard({
         {feature.description}
       </p>
     </div>
+  )
+}
+
+export function FeaturesSection() {
+  const sectionRef = useScrollReveal()
+
+  return (
+    <section className="relative px-6 py-24 md:py-32" ref={sectionRef}>
+      <div className="mx-auto max-w-6xl">
+        <div className="text-center mb-16">
+          <span className="inline-block text-xs font-medium text-primary border border-primary/20 bg-primary/5 px-3 py-1 rounded-full mb-4">
+            核心功能
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance">
+            {"你需要的，"}
+            <span className="gradient-text">{"这里都有"}</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-pretty">
+            从学习路径到实战工具，为你的 AI 编程之旅提供全方位支持
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature, i) => (
+            <FeatureCard key={feature.title} feature={feature} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
