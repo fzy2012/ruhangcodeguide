@@ -1,135 +1,84 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { getGuide } from "@/lib/api"
+import { BookOpen, ArrowRight, ArrowLeft, Code2 } from "lucide-react"
 
-export const metadata = {
-  title: "学习指南 - 代码指南 | 入行 365",
-  description: "系统化的 AI 编程学习路径，从入门到进阶的六大章节",
-}
+const API = "https://ruhangcodeguide.ruhang365.cn/api"
 
-// Fallback guide data in case the API is unavailable
-const fallbackGuide = [
-  {
-    id: "introduction",
-    title: "什么是 AI 编程",
-    emoji: "robot",
-    summary: "了解 AI 编程和 Vibe Coding 的概念，以及它们如何改变我们编写代码的方式。",
-    order: 1,
-    content: "",
-    subsections: [],
-  },
-  {
-    id: "getting-started",
-    title: "如何开始",
-    emoji: "rocket",
-    summary: "根据你的技术背景，选择最适合的入门工具和学习路径。",
-    order: 2,
-    content: "",
-    subsections: [],
-  },
-  {
-    id: "prompting",
-    title: "提示词技巧",
-    emoji: "speech_balloon",
-    summary: "学习如何编写高质量的提示词，让 AI 更好地理解你的需求。",
-    order: 3,
-    content: "",
-    subsections: [],
-  },
-  {
-    id: "project-setup",
-    title: "项目架构",
-    emoji: "building_construction",
-    summary: "学习如何组织你的 AI 编程项目，包括前后端分离、代码规范等。",
-    order: 4,
-    content: "",
-    subsections: [],
-  },
-  {
-    id: "debugging",
-    title: "调试与问题解决",
-    emoji: "bug",
-    summary: "当 AI 生成的代码出现问题时，如何有效地调试和修复。",
-    order: 5,
-    content: "",
-    subsections: [],
-  },
-  {
-    id: "advanced",
-    title: "进阶技巧",
-    emoji: "zap",
-    summary: "深入了解 MCP、A2A 等新技术，以及如何创建自己的 AI 编程代理。",
-    order: 6,
-    content: "",
-    subsections: [],
-  },
+const fallback = [
+  { id: "introduction", title: "什么是 AI 编程", emoji: "\u{1F916}", order: 1, summary: "了解 AI 编程和 Vibe Coding 的概念，以及它们如何改变我们编写代码的方式。" },
+  { id: "getting-started", title: "如何开始", emoji: "\u{1F680}", order: 2, summary: "根据你的技术背景，选择最适合的入门工具和学习路径。" },
+  { id: "prompting", title: "提示词技巧", emoji: "\u{1F4AC}", order: 3, summary: "学习如何编写高质量的提示词，让 AI 更好地理解你的需求。" },
+  { id: "project-setup", title: "项目架构", emoji: "\u{1F3D7}\uFE0F", order: 4, summary: "学习如何组织你的 AI 编程项目，包括前后端分离、代码规范等。" },
+  { id: "debugging", title: "调试与问题解决", emoji: "\u{1F41B}", order: 5, summary: "当 AI 生成的代码出现问题时，如何有效地调试和修复。" },
+  { id: "advanced", title: "进阶技巧", emoji: "\u26A1", order: 6, summary: "深入了解 MCP、A2A 等新技术，以及如何创建自己的 AI 编程代理。" },
 ]
 
-export default async function GuidePage() {
-  let sections = fallbackGuide
-  try {
-    sections = await getGuide()
-  } catch {
-    // use fallback
-  }
+export default function GuidePage() {
+  const [chapters, setChapters] = useState(fallback)
 
-  const sortedSections = sections.sort((a, b) => a.order - b.order)
+  useEffect(() => {
+    fetch(`${API}/guide`)
+      .then((r) => r.json())
+      .then((json) => {
+        if (json.success && Array.isArray(json.data)) {
+          setChapters(json.data.sort((a: { order: number }, b: { order: number }) => a.order - b.order))
+        }
+      })
+      .catch(() => {})
+  }, [])
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="relative border-b border-border">
-        <div className="grid-bg absolute inset-0 opacity-20" aria-hidden="true" />
-        <div className="relative mx-auto max-w-4xl px-6 pt-28 pb-12">
-          <span className="inline-block text-xs font-medium text-primary border border-primary/20 bg-primary/5 px-3 py-1 rounded-full mb-4">
-            学习路径
-          </span>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground text-balance">
-            AI 编程指南
+    <div className="min-h-screen bg-background grid-bg">
+      <header className="glass border-b border-border sticky top-0 z-50">
+        <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 border border-primary/30">
+              <Code2 className="w-4 h-4 text-primary" />
+            </div>
+            <span className="text-lg font-bold text-foreground">{"代码指南"}</span>
+          </Link>
+          <Link href="/" className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+            {"返回首页"}
+          </Link>
+        </div>
+      </header>
+
+      <main className="max-w-5xl mx-auto px-6 py-16">
+        <div className="mb-12">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <BookOpen className="w-5 h-5 text-primary" />
+            <span className="text-sm text-primary font-medium">{"完整指南"}</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
+            {"AI 编程"}
+            <span className="gradient-text">{" 学习路径"}</span>
           </h1>
-          <p className="mt-3 text-muted-foreground max-w-xl text-pretty">
-            六大章节，系统化的学习路径，带你从零基础走向 AI 编程实战。
+          <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
+            {"6 个章节，系统性地带你掌握 AI 编程和 Vibe Coding 的完整流程。"}
           </p>
         </div>
-      </div>
 
-      {/* Guide sections */}
-      <div className="mx-auto max-w-4xl px-6 py-12">
         <div className="flex flex-col gap-4">
-          {sortedSections.map((section, i) => (
-            <Link key={section.id} href={`/guide/${section.id}`}>
-              <div className="card-glow group flex items-start gap-6 rounded-xl border border-border bg-card/50 p-6 transition-all cursor-pointer">
-                <div className="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-colors">
-                  <span className="font-mono text-lg font-bold text-primary">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+          {chapters.map((ch, i) => (
+            <Link key={ch.id} href={`/guide/${ch.id}`}>
+              <div className="card-glow group flex items-start gap-6 rounded-xl border border-border bg-card/50 p-6">
+                <div className="flex-shrink-0 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-3xl">
+                  {ch.emoji}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h2 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {section.title}
-                  </h2>
-                  <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                    {section.summary}
-                  </p>
-                  {section.subsections && section.subsections.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {section.subsections.map((sub) => (
-                        <span
-                          key={sub.id}
-                          className="text-xs text-muted-foreground bg-secondary/50 px-2 py-0.5 rounded"
-                        >
-                          {sub.title}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                  <div className="text-xs text-primary font-mono mb-1">{`Chapter ${String(ch.order || i + 1).padStart(2, "0")}`}</div>
+                  <h2 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{ch.title}</h2>
+                  <p className="text-sm text-muted-foreground mt-1">{ch.summary}</p>
                 </div>
                 <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 mt-1" />
               </div>
             </Link>
           ))}
         </div>
-      </div>
+      </main>
     </div>
   )
 }

@@ -1,8 +1,17 @@
 import type { Metadata } from "next"
+import { Inter, JetBrains_Mono } from "next/font/google"
+import "./globals.css"
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+})
 
 export const metadata: Metadata = {
-  title: "代码指南 - 入行 365",
-  description: "AI 编程学习指南",
+  title: "代码指南 - 入行 365 | AI 编程学习平台",
+  description:
+    "入行 365 出品的 AI 编程学习指南，帮助你从零开始掌握 Vibe Coding，成为 AI 时代的开发者。",
 }
 
 export default function RootLayout({
@@ -11,8 +20,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="zh-CN">
-      <body>{children}</body>
+    <html lang="zh-CN" className={`${inter.variable} ${jetbrains.variable}`}>
+      <body className="bg-background text-foreground font-sans antialiased">
+        {children}
+      </body>
     </html>
   )
 }
