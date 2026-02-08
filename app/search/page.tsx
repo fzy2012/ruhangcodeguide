@@ -6,7 +6,7 @@ import {
   Search as SearchIcon,
   BookOpen,
   Wrench,
-  Library,
+  BookMarked,
   ArrowRight,
   X,
   Loader2,
@@ -16,7 +16,7 @@ import { search, type SearchResult } from "@/lib/api"
 const typeIcons: Record<string, typeof BookOpen> = {
   guide: BookOpen,
   tool: Wrench,
-  resource: Library,
+  resource: BookMarked,
 }
 
 const typeLabels: Record<string, string> = {

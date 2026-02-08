@@ -4,7 +4,7 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import {
   BookOpen,
   Wrench,
-  Library,
+  BookMarked,
   Search,
   Zap,
   Users,
@@ -22,7 +22,7 @@ const features = [
     description: "编辑器、CLI、Web 应用、Agent 一站式工具对比与推荐",
   },
   {
-    icon: Library,
+    icon: BookMarked,
     title: "精选学习资源",
     description: "文章、视频、课程、文档，经过筛选的高质量学习材料",
   },
