@@ -62,7 +62,7 @@ export default function ResourcesPage() {
     <div style={st.page} className="grid-bg">
       <header style={st.header}>
         <div style={st.headerInner}>
-          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10 }}><img src="https://ruhang365.cn/wp-content/uploads/2025/01/cropped-ai-ruhang365-.png" alt="入行 365" width={32} height={32} style={{ borderRadius: 8 }} /><span style={{ fontSize: 18, fontWeight: 700 }}>{"代码指南"}</span></Link>
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10 }}><img src="/logo-square.png" alt="入行 365" width={32} height={32} style={{ borderRadius: 8 }} /><span style={{ fontSize: 18, fontWeight: 700 }}>{"代码指南"}</span></Link>
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: "var(--fg-muted)" }}><SvgArrowLeft /><span>{"返回首页"}</span></Link>
         </div>
       </header>
