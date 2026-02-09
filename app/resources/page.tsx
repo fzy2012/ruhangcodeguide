@@ -1,129 +1,100 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo, useRef } from "react"
 import Link from "next/link"
-import { ExternalLink, FileText, Video, GraduationCap, BookOpen, Mic, Filter, User, Code2, ArrowLeft } from "lucide-react"
 
 const API = "https://ruhangcodeguide.ruhang365.cn/api"
+interface Resource { id: string; title: string; description: string; url: string; type: string; author?: string; tags: string[] }
 
-interface Resource { id: string; title: string; title_en?: string; description: string; url: string; type: string; author?: string; tags: string[] }
-
-const typeConfig: Record<string, { label: string; icon: typeof FileText; color: string }> = {
-  article: { label: "文章", icon: FileText, color: "text-primary" },
-  video: { label: "视频", icon: Video, color: "text-chart-3" },
-  course: { label: "课程", icon: GraduationCap, color: "text-accent" },
-  documentation: { label: "文档", icon: BookOpen, color: "text-chart-2" },
-  tutorial: { label: "教程/播客", icon: Mic, color: "text-chart-5" },
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [v, setV] = useState(false)
+  useEffect(() => { const el = ref.current; if (!el) return; const o = new IntersectionObserver(([e]) => { if (e.isIntersecting) setV(true) }, { threshold: 0.1 }); o.observe(el); return () => o.disconnect() }, [])
+  return { ref, v }
 }
 
+const typeConfig: Record<string, { label: string; color: string }> = {
+  article: { label: "文章", color: "hsl(187 100% 45%)" },
+  video: { label: "视频", color: "hsl(142 76% 36%)" },
+  course: { label: "课程", color: "hsl(199 89% 48%)" },
+  documentation: { label: "文档", color: "hsl(280 65% 60%)" },
+  tutorial: { label: "教程", color: "hsl(32 95% 44%)" },
+}
 const typeFilters = [
-  { id: "all", label: "全部", icon: Filter },
-  { id: "article", label: "文章", icon: FileText },
-  { id: "video", label: "视频", icon: Video },
-  { id: "course", label: "课程", icon: GraduationCap },
-  { id: "documentation", label: "文档", icon: BookOpen },
-  { id: "tutorial", label: "教程/播客", icon: Mic },
+  { id: "all", label: "全部" }, { id: "article", label: "文章" }, { id: "video", label: "视频" },
+  { id: "course", label: "课程" }, { id: "documentation", label: "文档" }, { id: "tutorial", label: "教程" },
 ]
 
 const fallbackResources: Resource[] = [
   { id: "end-of-programming", title: "编程的终结", description: "Tim O'Reilly 关于 AI 如何改变软件开发的深度分析。", url: "https://www.oreilly.com/radar/the-end-of-programming-as-we-know-it", type: "article", author: "Tim O'Reilly", tags: ["行业趋势"] },
   { id: "70-percent-problem", title: "70% 问题：AI 辅助编程的残酷真相", description: "Addy Osmani 揭示 AI 编程的局限性和真实效率。", url: "https://addyo.substack.com/p/the-70-problem-hard-truths-about", type: "article", author: "Addy Osmani", tags: ["深度分析"] },
   { id: "karpathy-software-changing", title: "软件正在再次改变", description: "Andrej Karpathy 关于 AI 如何改变软件开发的演讲。", url: "https://www.youtube.com/watch?v=LCEmiRjPEtQ", type: "video", author: "Andrej Karpathy", tags: ["演讲"] },
-  { id: "vibe-coding-replit", title: "Vibe Coding 101 with Replit", description: "DeepLearning.AI 和 Replit 联合推出的 Vibe Coding 入门课程。", url: "https://www.deeplearning.ai/short-courses/vibe-coding-101-with-replit/", type: "course", author: "DeepLearning.AI", tags: ["课程"] },
+  { id: "vibe-coding-replit", title: "Vibe Coding 101 with Replit", description: "DeepLearning.AI 和 Replit 联合推出的入门课程。", url: "https://www.deeplearning.ai/short-courses/vibe-coding-101-with-replit/", type: "course", author: "DeepLearning.AI", tags: ["课程"] },
 ]
+
+const SvgCode2 = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+const SvgBookOpen = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+const SvgArrowLeft = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+const SvgExternal = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+const SvgUser = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+
+const st = {
+  page: { minHeight: "100vh", background: "var(--bg)", color: "var(--fg)", fontFamily: "var(--font-sans)" } as React.CSSProperties,
+  header: { position: "sticky" as const, top: 0, zIndex: 50, borderBottom: "1px solid var(--border)", background: "hsl(222 47% 6% / 0.7)", backdropFilter: "blur(12px)" },
+  headerInner: { maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px" } as React.CSSProperties,
+  main: { maxWidth: 1200, margin: "0 auto", padding: "64px 24px" } as React.CSSProperties,
+  badge: { display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 9999, border: "1px solid hsl(187 100% 45% / 0.3)", background: "hsl(187 100% 45% / 0.05)", padding: "6px 16px", marginBottom: 16 } as React.CSSProperties,
+  tab: (active: boolean) => ({ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 8, padding: "8px 16px", fontSize: 14, fontWeight: 500, cursor: "pointer", border: active ? "none" : "1px solid var(--border)", background: active ? "var(--primary)" : "var(--bg-card)", color: active ? "var(--bg)" : "var(--fg-muted)", transition: "all 0.2s" } as React.CSSProperties),
+  card: { display: "flex", alignItems: "flex-start", gap: 20, borderRadius: "var(--radius)", border: "1px solid var(--border)", background: "var(--bg-card)", padding: 24, transition: "all 0.5s" } as React.CSSProperties,
+}
 
 export default function ResourcesPage() {
   const [activeType, setActiveType] = useState("all")
   const [resources, setResources] = useState<Resource[]>(fallbackResources)
+  const sr = useScrollReveal()
 
-  useEffect(() => {
-    fetch(`${API}/resources`)
-      .then((r) => r.json())
-      .then((json) => { if (json.success && Array.isArray(json.data)) setResources(json.data) })
-      .catch(() => {})
-  }, [])
+  useEffect(() => { fetch(`${API}/resources`).then(r => r.json()).then(json => { if (json.success && Array.isArray(json.data)) setResources(json.data) }).catch(() => {}) }, [])
 
-  const filtered = useMemo(() => activeType === "all" ? resources : resources.filter((r) => r.type === activeType), [resources, activeType])
-  const counts = useMemo(() => {
-    const m: Record<string, number> = { all: resources.length }
-    for (const r of resources) m[r.type] = (m[r.type] || 0) + 1
-    return m
-  }, [resources])
+  const filtered = useMemo(() => activeType === "all" ? resources : resources.filter(r => r.type === activeType), [resources, activeType])
+  const counts = useMemo(() => { const m: Record<string, number> = { all: resources.length }; for (const r of resources) m[r.type] = (m[r.type] || 0) + 1; return m }, [resources])
 
   return (
-    <div className="min-h-screen bg-background grid-bg">
-      <header className="glass border-b border-border sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 border border-primary/30">
-              <Code2 className="w-4 h-4 text-primary" />
-            </div>
-            <span className="text-lg font-bold text-foreground">{"代码指南"}</span>
-          </Link>
-          <Link href="/" className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            {"返回首页"}
-          </Link>
+    <div style={st.page} className="grid-bg">
+      <header style={st.header}>
+        <div style={st.headerInner}>
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 8 }}><div style={{ width: 32, height: 32, borderRadius: 8, background: "hsl(187 100% 45% / 0.1)", border: "1px solid hsl(187 100% 45% / 0.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--primary)" }}><SvgCode2 /></div><span style={{ fontSize: 18, fontWeight: 700 }}>{"代码指南"}</span></Link>
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: "var(--fg-muted)" }}><SvgArrowLeft /><span>{"返回首页"}</span></Link>
         </div>
       </header>
-
-      <main className="max-w-6xl mx-auto px-6 py-16">
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 mb-4">
-            <BookOpen className="w-3.5 h-3.5 text-primary" />
-            <span className="text-xs text-primary font-medium">{"学习资源"}</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            {"精选"}
-            <span className="gradient-text">{" 学习资源"}</span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
-            {"文章、视频、课程、文档 -- 经过筛选的高质量 AI 编程学习材料。"}
-          </p>
+      <main style={st.main}>
+        <div style={{ marginBottom: 48 }}>
+          <div style={st.badge}><span style={{ color: "var(--primary)" }}><SvgBookOpen /></span><span style={{ fontSize: 12, color: "var(--primary)", fontWeight: 500 }}>{"学习资源"}</span></div>
+          <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 700, marginBottom: 16 }}>{"精选"}<span className="gradient-text">{" 学习资源"}</span></h1>
+          <p style={{ fontSize: 18, color: "var(--fg-muted)", maxWidth: 640 }}>{"文章、视频、课程、文档 -- 经过筛选的高质量 AI 编程学习材料。"}</p>
         </div>
-
-        <div className="flex flex-wrap gap-2 mb-10">
-          {typeFilters.map((tf) => {
-            const Icon = tf.icon
-            const isActive = activeType === tf.id
-            return (
-              <button key={tf.id} onClick={() => setActiveType(tf.id)}
-                className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${isActive ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" : "border border-border bg-card/50 text-muted-foreground hover:border-primary/30 hover:text-foreground"}`}>
-                <Icon className="h-4 w-4" />
-                {tf.label}
-                <span className={`text-xs ${isActive ? "text-primary-foreground/70" : "text-muted-foreground/60"}`}>{counts[tf.id] || 0}</span>
-              </button>
-            )
-          })}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 40 }}>
+          {typeFilters.map(f => (
+            <button key={f.id} onClick={() => setActiveType(f.id)} style={st.tab(activeType === f.id)}>
+              {f.label}<span style={{ fontSize: 12, opacity: 0.7 }}>{counts[f.id] || 0}</span>
+            </button>
+          ))}
         </div>
-
-        <div className="flex flex-col gap-4">
-          {filtered.map((resource) => {
-            const config = typeConfig[resource.type] || typeConfig.article
-            const TypeIcon = config.icon
+        <div ref={sr.ref} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {filtered.map((res, i) => {
+            const tc = typeConfig[res.type] || typeConfig.article
             return (
-              <a key={resource.id} href={resource.url} target="_blank" rel="noopener noreferrer"
-                className="card-glow group flex items-start gap-5 rounded-xl border border-border bg-card/50 p-6">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-colors">
-                  <TypeIcon className={`h-5 w-5 ${config.color}`} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-1">{resource.title}</h3>
-                    <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground/40 group-hover:text-primary transition-colors mt-1" />
+              <a key={res.id} href={res.url} target="_blank" rel="noopener noreferrer" className="card-glow" style={{ ...st.card, opacity: sr.v ? 1 : 0, transform: sr.v ? "translateY(0)" : "translateY(20px)", transitionDelay: `${i * 60}ms` }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: `${tc.color}15`, border: `1px solid ${tc.color}30`, display: "flex", alignItems: "center", justifyContent: "center", color: tc.color, flexShrink: 0 }}><SvgBookOpen /></div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
+                    <h3 style={{ fontSize: 16, fontWeight: 600 }}>{res.title}</h3>
+                    <span style={{ color: "var(--fg-muted)", opacity: 0.4, flexShrink: 0, marginTop: 2 }}><SvgExternal /></span>
                   </div>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2">{resource.description}</p>
-                  <div className="mt-3 flex items-center gap-3 flex-wrap">
-                    <span className={`text-[10px] font-medium px-2 py-0.5 rounded border ${config.color} bg-secondary/30 border-border`}>{config.label}</span>
-                    {resource.author && (
-                      <span className="flex items-center gap-1 text-xs text-muted-foreground/60">
-                        <User className="h-3 w-3" />
-                        {resource.author}
-                      </span>
-                    )}
-                    {resource.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="text-[10px] text-muted-foreground bg-secondary/50 px-2 py-0.5 rounded">{tag}</span>
-                    ))}
+                  <p style={{ fontSize: 14, color: "var(--fg-muted)", lineHeight: 1.6, marginTop: 8 }}>{res.description}</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 12, flexWrap: "wrap" }}>
+                    <span style={{ fontSize: 10, fontWeight: 500, padding: "2px 8px", borderRadius: 4, border: `1px solid ${tc.color}30`, color: tc.color, background: `${tc.color}10` }}>{tc.label}</span>
+                    {res.author && <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: "var(--fg-muted)", opacity: 0.6 }}><SvgUser />{res.author}</span>}
+                    {res.tags.slice(0, 3).map(tag => <span key={tag} style={{ fontSize: 10, color: "var(--fg-muted)", background: "var(--secondary)", padding: "2px 8px", borderRadius: 4 }}>{tag}</span>)}
                   </div>
                 </div>
               </a>

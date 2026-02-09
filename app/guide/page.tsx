@@ -1,10 +1,16 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { BookOpen, ArrowRight, ArrowLeft, Code2 } from "lucide-react"
 
 const API = "https://ruhangcodeguide.ruhang365.cn/api"
+
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [v, setV] = useState(false)
+  useEffect(() => { const el = ref.current; if (!el) return; const o = new IntersectionObserver(([e]) => { if (e.isIntersecting) setV(true) }, { threshold: 0.1 }); o.observe(el); return () => o.disconnect() }, [])
+  return { ref, v }
+}
 
 const fallback = [
   { id: "introduction", title: "什么是 AI 编程", emoji: "\u{1F916}", order: 1, summary: "了解 AI 编程和 Vibe Coding 的概念，以及它们如何改变我们编写代码的方式。" },
@@ -15,66 +21,58 @@ const fallback = [
   { id: "advanced", title: "进阶技巧", emoji: "\u26A1", order: 6, summary: "深入了解 MCP、A2A 等新技术，以及如何创建自己的 AI 编程代理。" },
 ]
 
+const st = {
+  page: { minHeight: "100vh", background: "var(--bg)", color: "var(--fg)", fontFamily: "var(--font-sans)" } as React.CSSProperties,
+  header: { position: "sticky" as const, top: 0, zIndex: 50, borderBottom: "1px solid var(--border)", background: "hsl(222 47% 6% / 0.7)", backdropFilter: "blur(12px)" },
+  headerInner: { maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px" } as React.CSSProperties,
+  logo: { display: "flex", alignItems: "center", gap: 8 } as React.CSSProperties,
+  logoIcon: { width: 32, height: 32, borderRadius: 8, background: "hsl(187 100% 45% / 0.1)", border: "1px solid hsl(187 100% 45% / 0.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--primary)" } as React.CSSProperties,
+  back: { display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: "var(--fg-muted)" } as React.CSSProperties,
+  main: { maxWidth: 960, margin: "0 auto", padding: "64px 24px" } as React.CSSProperties,
+  badge: { display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 9999, border: "1px solid hsl(187 100% 45% / 0.3)", background: "hsl(187 100% 45% / 0.05)", padding: "6px 16px", marginBottom: 16 } as React.CSSProperties,
+  card: { display: "flex", alignItems: "flex-start", gap: 24, padding: 24, background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius)", transition: "all 0.5s" } as React.CSSProperties,
+  icon: { width: 56, height: 56, borderRadius: 12, background: "hsl(187 100% 45% / 0.1)", border: "1px solid hsl(187 100% 45% / 0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, flexShrink: 0 } as React.CSSProperties,
+}
+
+const SvgCode2 = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+const SvgBookOpen = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+const SvgArrowLeft = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+const SvgArrowRight = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
 export default function GuidePage() {
   const [chapters, setChapters] = useState(fallback)
+  const sr = useScrollReveal()
 
   useEffect(() => {
-    fetch(`${API}/guide`)
-      .then((r) => r.json())
-      .then((json) => {
-        if (json.success && Array.isArray(json.data)) {
-          setChapters(json.data.sort((a: { order: number }, b: { order: number }) => a.order - b.order))
-        }
-      })
-      .catch(() => {})
+    fetch(`${API}/guide`).then(r => r.json()).then(json => {
+      if (json.success && Array.isArray(json.data)) setChapters(json.data.sort((a: { order: number }, b: { order: number }) => a.order - b.order))
+    }).catch(() => {})
   }, [])
 
   return (
-    <div className="min-h-screen bg-background grid-bg">
-      <header className="glass border-b border-border sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 border border-primary/30">
-              <Code2 className="w-4 h-4 text-primary" />
-            </div>
-            <span className="text-lg font-bold text-foreground">{"代码指南"}</span>
-          </Link>
-          <Link href="/" className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            {"返回首页"}
-          </Link>
+    <div style={st.page} className="grid-bg">
+      <header style={st.header}>
+        <div style={st.headerInner}>
+          <Link href="/" style={st.logo}><div style={st.logoIcon}><SvgCode2 /></div><span style={{ fontSize: 18, fontWeight: 700 }}>{"代码指南"}</span></Link>
+          <Link href="/" style={st.back}><SvgArrowLeft /><span>{"返回首页"}</span></Link>
         </div>
       </header>
-
-      <main className="max-w-5xl mx-auto px-6 py-16">
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <BookOpen className="w-5 h-5 text-primary" />
-            <span className="text-sm text-primary font-medium">{"完整指南"}</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            {"AI 编程"}
-            <span className="gradient-text">{" 学习路径"}</span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
-            {"6 个章节，系统性地带你掌握 AI 编程和 Vibe Coding 的完整流程。"}
-          </p>
+      <main style={st.main}>
+        <div style={{ marginBottom: 48 }}>
+          <div style={st.badge}><span style={{ color: "var(--primary)" }}><SvgBookOpen /></span><span style={{ fontSize: 12, color: "var(--primary)", fontWeight: 500 }}>{"完整指南"}</span></div>
+          <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 700, marginBottom: 16 }}>{"AI 编程"}<span className="gradient-text">{" 学习路径"}</span></h1>
+          <p style={{ fontSize: 18, color: "var(--fg-muted)", maxWidth: 640 }}>{"6 个章节，系统性地带你掌握 AI 编程和 Vibe Coding 的完整流程。"}</p>
         </div>
-
-        <div className="flex flex-col gap-4">
+        <div ref={sr.ref} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {chapters.map((ch, i) => (
-            <Link key={ch.id} href={`/guide/${ch.id}`}>
-              <div className="card-glow group flex items-start gap-6 rounded-xl border border-border bg-card/50 p-6">
-                <div className="flex-shrink-0 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-3xl">
-                  {ch.emoji}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-xs text-primary font-mono mb-1">{`Chapter ${String(ch.order || i + 1).padStart(2, "0")}`}</div>
-                  <h2 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{ch.title}</h2>
-                  <p className="text-sm text-muted-foreground mt-1">{ch.summary}</p>
-                </div>
-                <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 mt-1" />
+            <Link key={ch.id} href={`/guide/${ch.id}`} className="card-glow" style={{ ...st.card, opacity: sr.v ? 1 : 0, transform: sr.v ? "translateY(0)" : "translateY(20px)", transitionDelay: `${i * 80}ms` }}>
+              <div style={st.icon}>{ch.emoji}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "hsl(187 100% 45% / 0.6)", marginBottom: 4 }}>{`Chapter ${String(ch.order || i + 1).padStart(2, "0")}`}</div>
+                <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 4 }}>{ch.title}</h2>
+                <p style={{ fontSize: 14, color: "var(--fg-muted)" }}>{ch.summary}</p>
               </div>
+              <span style={{ color: "var(--fg-muted)", flexShrink: 0, marginTop: 4 }}><SvgArrowRight /></span>
             </Link>
           ))}
         </div>
