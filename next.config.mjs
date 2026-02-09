@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Force rebuild - cache buster v2
-  reactCompiler: false,
   poweredByHeader: false,
   compress: true,
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "ruhang365.cn" },
+      { protocol: "https", hostname: "*.ruhang365.cn" },
+    ],
+  },
 }
 
 export default nextConfig

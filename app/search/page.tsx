@@ -57,7 +57,7 @@ export default function SearchPage() {
       <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
       <header style={st.header}>
         <div style={st.headerInner}>
-          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 8 }}><div style={{ width: 32, height: 32, borderRadius: 8, background: "hsl(187 100% 45% / 0.1)", border: "1px solid hsl(187 100% 45% / 0.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--primary)" }}><SvgCode2 /></div><span style={{ fontSize: 18, fontWeight: 700 }}>{"代码指南"}</span></Link>
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10 }}><img src="https://ruhang365.cn/wp-content/uploads/2025/01/cropped-ai-ruhang365-.png" alt="入行 365" width={32} height={32} style={{ borderRadius: 8 }} /><span style={{ fontSize: 18, fontWeight: 700 }}>{"代码指南"}</span></Link>
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: "var(--fg-muted)" }}><SvgArrowLeft /><span>{"返回首页"}</span></Link>
         </div>
       </header>

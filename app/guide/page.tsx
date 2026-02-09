@@ -53,7 +53,7 @@ export default function GuidePage() {
     <div style={st.page} className="grid-bg">
       <header style={st.header}>
         <div style={st.headerInner}>
-          <Link href="/" style={st.logo}><div style={st.logoIcon}><SvgCode2 /></div><span style={{ fontSize: 18, fontWeight: 700 }}>{"代码指南"}</span></Link>
+          <Link href="/" style={st.logo}><img src="https://ruhang365.cn/wp-content/uploads/2025/01/cropped-ai-ruhang365-.png" alt="入行 365" width={32} height={32} style={{ borderRadius: 8 }} /><span style={{ fontSize: 18, fontWeight: 700 }}>{"代码指南"}</span></Link>
           <Link href="/" style={st.back}><SvgArrowLeft /><span>{"返回首页"}</span></Link>
         </div>
       </header>

@@ -128,8 +128,8 @@ function Navbar() {
   return (
     <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, transition: "all 0.3s", borderBottom: scrolled ? "1px solid var(--border)" : "none", background: scrolled ? "hsl(222 47% 6% / 0.7)" : "transparent", backdropFilter: scrolled ? "blur(12px)" : "none" }}>
       <div style={{ ...s.maxW, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px" }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: "hsl(187 100% 45% / 0.1)", border: "1px solid hsl(187 100% 45% / 0.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--primary)" }}><Icons.Code2 /></div>
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <img src="https://ruhang365.cn/wp-content/uploads/2025/01/cropped-ai-ruhang365-.png" alt="入行 365" width={32} height={32} style={{ borderRadius: 8 }} />
           <span style={{ fontSize: 18, fontWeight: 700, color: "var(--fg)" }}>{"代码指南"}</span>
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: 32 }} className="nav-desktop">
@@ -296,8 +296,8 @@ function Footer() {
       <div style={s.maxW}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 48, marginBottom: 48 }}>
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 8, background: "hsl(187 100% 45% / 0.1)", border: "1px solid hsl(187 100% 45% / 0.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--primary)" }}><Icons.Code2 /></div>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+              <img src="https://ruhang365.cn/wp-content/uploads/2025/01/cropped-ai-ruhang365-.png" alt="入行 365" width={32} height={32} style={{ borderRadius: 8 }} />
               <span style={{ fontSize: 18, fontWeight: 700, color: "var(--fg)" }}>{"代码指南"}</span>
             </div>
             <p style={{ ...s.mutedText, lineHeight: 1.6 }}>{"入行 365 出品的 AI 编程学习指南，帮助你从零基础到独立开发，掌握 Vibe Coding 的完整路径。"}</p>
