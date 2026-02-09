@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN" className={`${inter.variable} ${jetbrains.variable}`}>
-      <body className="bg-background text-foreground font-sans antialiased">
+      <body style={{ fontFamily: "var(--font-sans)" }}>
         {children}
       </body>
     </html>
