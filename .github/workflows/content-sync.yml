@@ -14,8 +14,10 @@ jobs:
       contents: write   # 需要写权限才能 commit & push
 
     steps:
-      - name: Checkout
+      - name: Checkout main
         uses: actions/checkout@v4
+        with:
+          ref: main       # 始终在 main 分支上操作，确保 Vercel 能检测到变更
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -39,7 +41,7 @@ jobs:
       - name: Sync YAML → TypeScript
         run: pnpm sync
 
-      - name: Commit and push if content changed
+      - name: Commit and push to main if content changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -48,5 +50,5 @@ jobs:
             echo "No content changes. Skipping commit."
           else
             git commit -m "chore: auto-sync content from upstream [skip ci]"
-            git push
+            git push origin main
           fi
