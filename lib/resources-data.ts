@@ -1,0 +1,134 @@
+export interface Resource {
+  id: string
+  title: string
+  description: string
+  url: string
+  type: string
+  author?: string | null
+  tags: string[]
+}
+
+export const resourcesData: Resource[] = [
+  // ============ 文章 ============
+  {
+    id: "end-of-programming",
+    title: "编程的终结：我们所知道的编程正在改变",
+    description: "Tim O'Reilly 关于 AI 如何改变软件开发的深度分析。",
+    url: "https://www.oreilly.com/radar/the-end-of-programming-as-we-know-it",
+    type: "article",
+    author: "Tim O'Reilly",
+    tags: ["行业趋势", "深度分析"],
+  },
+  {
+    id: "revenge-junior-dev",
+    title: "初级开发者的逆袭",
+    description: "Steve Yegge 分析 AI 如何改变开发者等级制度。",
+    url: "https://sourcegraph.com/blog/revenge-of-the-junior-developer",
+    type: "article",
+    author: "Steve Yegge",
+    tags: ["职业发展", "观点"],
+  },
+  {
+    id: "70-percent-problem",
+    title: "70% 问题：AI 辅助编程的残酷真相",
+    description: "Addy Osmani 揭示 AI 编程的局限性和真实效率。",
+    url: "https://addyo.substack.com/p/the-70-problem-hard-truths-about",
+    type: "article",
+    author: "Addy Osmani",
+    tags: ["实践经验", "深度分析"],
+  },
+  {
+    id: "ai-augmented-engineer",
+    title: "成为 AI 增强型工程师",
+    description: "Mary Rose Cook 的 AI 辅助开发实践指南。",
+    url: "https://maryrosecook.com/blog/post/become-an-ai-augmented-engineer",
+    type: "article",
+    author: "Mary Rose Cook",
+    tags: ["实践指南", "技能提升"],
+  },
+  {
+    id: "using-llms-for-code",
+    title: "使用 LLM 进行编程",
+    description: "Simon Willison 分享使用 LLM 编程的经验和技巧。",
+    url: "https://simonwillison.net/2025/Mar/11/using-llms-for-code/",
+    type: "article",
+    author: "Simon Willison",
+    tags: ["实践经验", "技巧"],
+  },
+  {
+    id: "screwed-unless-action",
+    title: "AI 来了，不行动就完蛋",
+    description: "Geoffrey Huntley 给学生的警醒：必须立即学习 AI 编程。",
+    url: "https://ghuntley.com/screwed/",
+    type: "article",
+    author: "Geoffrey Huntley",
+    tags: ["职业发展", "建议"],
+  },
+  // ============ 视频 ============
+  {
+    id: "karpathy-software-changing",
+    title: "软件正在再次改变",
+    description: "Andrej Karpathy 关于 AI 如何改变软件开发的演讲。",
+    url: "https://www.youtube.com/watch?v=LCEmiRjPEtQ",
+    type: "video",
+    author: "Andrej Karpathy",
+    tags: ["演讲", "行业趋势"],
+  },
+  {
+    id: "prepare-future-ai",
+    title: "如何为 AI 开发的未来做准备",
+    description: "Santiago 分享开发者如何适应 AI 时代。",
+    url: "https://www.youtube.com/watch?v=BP54GqVK3JA",
+    type: "video",
+    author: "Santiago",
+    tags: ["职业发展", "建议"],
+  },
+  {
+    id: "cursor-tutorial-2025",
+    title: "Cursor AI 教程 2025 版",
+    description: "适合新手的 Cursor 完整入门教程。",
+    url: "https://www.youtube.com/watch?v=3289vhOUdKA",
+    type: "video",
+    author: null,
+    tags: ["教程", "Cursor", "入门"],
+  },
+  // ============ 课程 ============
+  {
+    id: "vibe-coding-replit",
+    title: "Vibe Coding 101 with Replit",
+    description: "DeepLearning.AI 和 Replit 联合推出的 Vibe Coding 入门课程。",
+    url: "https://www.deeplearning.ai/short-courses/vibe-coding-101-with-replit/",
+    type: "course",
+    author: "DeepLearning.AI",
+    tags: ["课程", "Vibe Coding", "入门", "Replit"],
+  },
+  // ============ 文档 ============
+  {
+    id: "anthropic-xml-tags",
+    title: "Anthropic 提示工程：使用 XML 标签",
+    description: "Anthropic 官方指南：如何在提示词中使用 XML 标签。",
+    url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags",
+    type: "documentation",
+    author: "Anthropic",
+    tags: ["文档", "提示工程", "Claude"],
+  },
+  {
+    id: "how-to-build-agent",
+    title: "如何构建 AI Agent",
+    description: "Thorsten Ball 的 AI Agent 开发指南。",
+    url: "https://ampcode.com/how-to-build-an-agent",
+    type: "tutorial",
+    author: "Thorsten Ball",
+    tags: ["教程", "Agent", "高级"],
+  },
+  // ============ 播客 ============
+  {
+    id: "raising-agent-podcast",
+    title: "Raising an Agent 播客",
+    description: "Amp 团队的播客，讨论 AI Agent 开发。",
+    url: "https://ampcode.com/podcast",
+    type: "tutorial",
+    author: "Amp Team",
+    tags: ["播客", "Agent"],
+  },
+]
