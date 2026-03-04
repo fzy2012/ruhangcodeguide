@@ -1,3 +1,4 @@
+// AUTO-GENERATED — do not edit directly. Edit backend/app/data/tools.yaml instead.
 export interface Tool {
   id: string
   name: string
@@ -9,7 +10,6 @@ export interface Tool {
 }
 
 export const toolsData: Tool[] = [
-  // ============ 编辑器 / IDE ============
   {
     id: "cursor",
     name: "Cursor",
@@ -17,7 +17,7 @@ export const toolsData: Tool[] = [
     url: "https://cursor.com",
     category: "editor",
     is_free: false,
-    tags: ["编辑器", "AI助手", "Agent模式", "推荐"],
+    tags: ["编辑器","AI助手","Agent模式","推荐"],
   },
   {
     id: "windsurf",
@@ -26,7 +26,7 @@ export const toolsData: Tool[] = [
     url: "https://windsurf.com",
     category: "editor",
     is_free: true,
-    tags: ["编辑器", "免费", "AI助手"],
+    tags: ["编辑器","免费","AI助手"],
   },
   {
     id: "vscode-copilot",
@@ -35,7 +35,7 @@ export const toolsData: Tool[] = [
     url: "https://code.visualstudio.com/docs/copilot/setup",
     category: "editor",
     is_free: false,
-    tags: ["编辑器", "微软", "Copilot"],
+    tags: ["编辑器","微软","Copilot"],
   },
   {
     id: "cline",
@@ -44,7 +44,7 @@ export const toolsData: Tool[] = [
     url: "https://cline.bot/",
     category: "editor",
     is_free: true,
-    tags: ["编辑器", "插件", "开源"],
+    tags: ["编辑器","插件","开源"],
   },
   {
     id: "amp",
@@ -53,7 +53,7 @@ export const toolsData: Tool[] = [
     url: "https://ampcode.com",
     category: "editor",
     is_free: false,
-    tags: ["编辑器", "多代理", "高级"],
+    tags: ["编辑器","多代理","高级"],
   },
   {
     id: "kiro",
@@ -62,9 +62,8 @@ export const toolsData: Tool[] = [
     url: "https://kiro.dev",
     category: "editor",
     is_free: false,
-    tags: ["编辑器", "AWS"],
+    tags: ["编辑器","AWS"],
   },
-  // ============ 命令行工具 ============
   {
     id: "claude-code",
     name: "Claude Code",
@@ -72,7 +71,7 @@ export const toolsData: Tool[] = [
     url: "https://github.com/anthropics/claude-code",
     category: "cli",
     is_free: false,
-    tags: ["CLI", "Anthropic", "高级"],
+    tags: ["CLI","Anthropic","高级"],
   },
   {
     id: "aider",
@@ -81,7 +80,7 @@ export const toolsData: Tool[] = [
     url: "https://aider.chat/",
     category: "cli",
     is_free: true,
-    tags: ["CLI", "开源", "推荐"],
+    tags: ["CLI","开源","推荐"],
   },
   {
     id: "gemini-cli",
@@ -90,7 +89,7 @@ export const toolsData: Tool[] = [
     url: "https://github.com/google-gemini/gemini-cli",
     category: "cli",
     is_free: true,
-    tags: ["CLI", "Google", "Gemini"],
+    tags: ["CLI","Google","Gemini"],
   },
   {
     id: "openai-codex",
@@ -99,7 +98,7 @@ export const toolsData: Tool[] = [
     url: "https://github.com/openai/codex",
     category: "cli",
     is_free: false,
-    tags: ["CLI", "OpenAI"],
+    tags: ["CLI","OpenAI"],
   },
   {
     id: "codebuff",
@@ -110,7 +109,6 @@ export const toolsData: Tool[] = [
     is_free: false,
     tags: ["CLI"],
   },
-  // ============ Web 应用 ============
   {
     id: "bolt",
     name: "Bolt",
@@ -118,7 +116,7 @@ export const toolsData: Tool[] = [
     url: "https://bolt.new",
     category: "webapp",
     is_free: true,
-    tags: ["Web应用", "可视化", "原型", "推荐"],
+    tags: ["Web应用","可视化","原型","推荐"],
   },
   {
     id: "v0",
@@ -127,7 +125,7 @@ export const toolsData: Tool[] = [
     url: "https://v0.dev",
     category: "webapp",
     is_free: true,
-    tags: ["Web应用", "React", "Next.js", "UI设计", "推荐"],
+    tags: ["Web应用","React","Next.js","UI设计","推荐"],
   },
   {
     id: "replit",
@@ -136,7 +134,7 @@ export const toolsData: Tool[] = [
     url: "https://replit.com",
     category: "webapp",
     is_free: true,
-    tags: ["Web应用", "在线IDE", "多语言"],
+    tags: ["Web应用","在线IDE","多语言"],
   },
   {
     id: "lovable",
@@ -145,7 +143,7 @@ export const toolsData: Tool[] = [
     url: "https://lovable.dev",
     category: "webapp",
     is_free: true,
-    tags: ["Web应用", "免费", "GitHub导出"],
+    tags: ["Web应用","免费","GitHub导出"],
   },
   {
     id: "firebase-studio",
@@ -154,9 +152,8 @@ export const toolsData: Tool[] = [
     url: "https://firebase.studio/",
     category: "webapp",
     is_free: true,
-    tags: ["Web应用", "Firebase", "Google"],
+    tags: ["Web应用","Firebase","Google"],
   },
-  // ============ 后台代理 ============
   {
     id: "devin",
     name: "Devin",
@@ -164,7 +161,7 @@ export const toolsData: Tool[] = [
     url: "https://devin.ai",
     category: "agent",
     is_free: false,
-    tags: ["Agent", "自主开发", "高级"],
+    tags: ["Agent","自主开发","高级"],
   },
   {
     id: "openhands",
@@ -173,7 +170,7 @@ export const toolsData: Tool[] = [
     url: "https://github.com/All-Hands-AI/OpenHands",
     category: "agent",
     is_free: true,
-    tags: ["Agent", "开源", "Docker"],
+    tags: ["Agent","开源","Docker"],
   },
   {
     id: "coderabbit",
@@ -182,9 +179,8 @@ export const toolsData: Tool[] = [
     url: "https://www.coderabbit.ai/",
     category: "agent",
     is_free: false,
-    tags: ["Agent", "代码审查", "GitHub"],
+    tags: ["Agent","代码审查","GitHub"],
   },
-  // ============ 辅助工具 ============
   {
     id: "repomix",
     name: "repomix",
@@ -192,7 +188,7 @@ export const toolsData: Tool[] = [
     url: "https://repomix.com/",
     category: "helper",
     is_free: true,
-    tags: ["辅助工具", "代码打包", "开源"],
+    tags: ["辅助工具","代码打包","开源"],
   },
   {
     id: "specstory",
@@ -201,7 +197,7 @@ export const toolsData: Tool[] = [
     url: "https://specstory.com/",
     category: "helper",
     is_free: false,
-    tags: ["辅助工具", "PRD", "文档"],
+    tags: ["辅助工具","PRD","文档"],
   },
   {
     id: "claude-task-master",
@@ -210,7 +206,7 @@ export const toolsData: Tool[] = [
     url: "https://github.com/eyaltoledano/claude-task-master",
     category: "helper",
     is_free: true,
-    tags: ["辅助工具", "任务管理", "开源"],
+    tags: ["辅助工具","任务管理","开源"],
   },
   {
     id: "codeguide",
@@ -219,6 +215,6 @@ export const toolsData: Tool[] = [
     url: "https://www.codeguide.dev/",
     category: "helper",
     is_free: false,
-    tags: ["辅助工具", "文档"],
+    tags: ["辅助工具","文档"],
   },
 ]

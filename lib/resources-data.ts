@@ -1,3 +1,4 @@
+// AUTO-GENERATED — do not edit directly. Edit backend/app/data/resources.yaml instead.
 export interface Resource {
   id: string
   title: string
@@ -9,7 +10,6 @@ export interface Resource {
 }
 
 export const resourcesData: Resource[] = [
-  // ============ 文章 ============
   {
     id: "end-of-programming",
     title: "编程的终结：我们所知道的编程正在改变",
@@ -17,7 +17,7 @@ export const resourcesData: Resource[] = [
     url: "https://www.oreilly.com/radar/the-end-of-programming-as-we-know-it",
     type: "article",
     author: "Tim O'Reilly",
-    tags: ["行业趋势", "深度分析"],
+    tags: ["行业趋势","深度分析"],
   },
   {
     id: "revenge-junior-dev",
@@ -26,7 +26,7 @@ export const resourcesData: Resource[] = [
     url: "https://sourcegraph.com/blog/revenge-of-the-junior-developer",
     type: "article",
     author: "Steve Yegge",
-    tags: ["职业发展", "观点"],
+    tags: ["职业发展","观点"],
   },
   {
     id: "70-percent-problem",
@@ -35,7 +35,7 @@ export const resourcesData: Resource[] = [
     url: "https://addyo.substack.com/p/the-70-problem-hard-truths-about",
     type: "article",
     author: "Addy Osmani",
-    tags: ["实践经验", "深度分析"],
+    tags: ["实践经验","深度分析"],
   },
   {
     id: "ai-augmented-engineer",
@@ -44,7 +44,7 @@ export const resourcesData: Resource[] = [
     url: "https://maryrosecook.com/blog/post/become-an-ai-augmented-engineer",
     type: "article",
     author: "Mary Rose Cook",
-    tags: ["实践指南", "技能提升"],
+    tags: ["实践指南","技能提升"],
   },
   {
     id: "using-llms-for-code",
@@ -53,7 +53,7 @@ export const resourcesData: Resource[] = [
     url: "https://simonwillison.net/2025/Mar/11/using-llms-for-code/",
     type: "article",
     author: "Simon Willison",
-    tags: ["实践经验", "技巧"],
+    tags: ["实践经验","技巧"],
   },
   {
     id: "screwed-unless-action",
@@ -62,9 +62,8 @@ export const resourcesData: Resource[] = [
     url: "https://ghuntley.com/screwed/",
     type: "article",
     author: "Geoffrey Huntley",
-    tags: ["职业发展", "建议"],
+    tags: ["职业发展","建议"],
   },
-  // ============ 视频 ============
   {
     id: "karpathy-software-changing",
     title: "软件正在再次改变",
@@ -72,7 +71,7 @@ export const resourcesData: Resource[] = [
     url: "https://www.youtube.com/watch?v=LCEmiRjPEtQ",
     type: "video",
     author: "Andrej Karpathy",
-    tags: ["演讲", "行业趋势"],
+    tags: ["演讲","行业趋势"],
   },
   {
     id: "prepare-future-ai",
@@ -81,7 +80,7 @@ export const resourcesData: Resource[] = [
     url: "https://www.youtube.com/watch?v=BP54GqVK3JA",
     type: "video",
     author: "Santiago",
-    tags: ["职业发展", "建议"],
+    tags: ["职业发展","建议"],
   },
   {
     id: "cursor-tutorial-2025",
@@ -90,9 +89,8 @@ export const resourcesData: Resource[] = [
     url: "https://www.youtube.com/watch?v=3289vhOUdKA",
     type: "video",
     author: null,
-    tags: ["教程", "Cursor", "入门"],
+    tags: ["教程","Cursor","入门"],
   },
-  // ============ 课程 ============
   {
     id: "vibe-coding-replit",
     title: "Vibe Coding 101 with Replit",
@@ -100,9 +98,8 @@ export const resourcesData: Resource[] = [
     url: "https://www.deeplearning.ai/short-courses/vibe-coding-101-with-replit/",
     type: "course",
     author: "DeepLearning.AI",
-    tags: ["课程", "Vibe Coding", "入门", "Replit"],
+    tags: ["课程","Vibe Coding","入门","Replit"],
   },
-  // ============ 文档 ============
   {
     id: "anthropic-xml-tags",
     title: "Anthropic 提示工程：使用 XML 标签",
@@ -110,7 +107,7 @@ export const resourcesData: Resource[] = [
     url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags",
     type: "documentation",
     author: "Anthropic",
-    tags: ["文档", "提示工程", "Claude"],
+    tags: ["文档","提示工程","Claude"],
   },
   {
     id: "how-to-build-agent",
@@ -119,9 +116,8 @@ export const resourcesData: Resource[] = [
     url: "https://ampcode.com/how-to-build-an-agent",
     type: "tutorial",
     author: "Thorsten Ball",
-    tags: ["教程", "Agent", "高级"],
+    tags: ["教程","Agent","高级"],
   },
-  // ============ 播客 ============
   {
     id: "raising-agent-podcast",
     title: "Raising an Agent 播客",
@@ -129,6 +125,6 @@ export const resourcesData: Resource[] = [
     url: "https://ampcode.com/podcast",
     type: "tutorial",
     author: "Amp Team",
-    tags: ["播客", "Agent"],
+    tags: ["播客","Agent"],
   },
 ]
