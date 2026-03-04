@@ -30,24 +30,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # ──────────────────────────────────────────────────────────────
-      # 在这里添加从外部数据源拉取内容的步骤。
-      # 示例：从 Notion 数据库同步
-      #
-      # - name: Fetch from Notion
-      #   env:
-      #     NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-      #     NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-      #   run: node scripts/fetch-notion.mjs
-      #
-      # 示例：从 Google Sheets 同步
-      #
-      # - name: Fetch from Google Sheets
-      #   env:
-      #     GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
-      #     GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
-      #   run: node scripts/fetch-sheets.mjs
-      # ──────────────────────────────────────────────────────────────
+      - name: Fetch upstream content
+        env:
+          # GITHUB_TOKEN 由 Actions 自动提供，用于提高 API 速率限制（60→5000 次/小时）
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/fetch-upstream.mjs
 
       - name: Sync YAML → TypeScript
         run: pnpm sync
@@ -60,6 +47,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No content changes. Skipping commit."
           else
-            git commit -m "chore: auto-sync content [skip ci]"
+            git commit -m "chore: auto-sync content from upstream [skip ci]"
             git push
           fi
