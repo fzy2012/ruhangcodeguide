@@ -61,7 +61,7 @@ export default function GuidePage() {
         <div style={{ marginBottom: 48 }}>
           <div style={st.badge}><span style={{ color: "var(--primary)" }}><SvgBookOpen /></span><span style={{ fontSize: 12, color: "var(--primary)", fontWeight: 500 }}>{"完整指南"}</span></div>
           <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 700, marginBottom: 16 }}>{"AI 编程"}<span className="gradient-text">{" 学习路径"}</span></h1>
-          <p style={{ fontSize: 18, color: "var(--fg-muted)", maxWidth: 640 }}>{"6 个章节，系统性地带你掌握 AI 编程和 Vibe Coding 的完整流程。"}</p>
+          <p style={{ fontSize: 18, color: "var(--fg-muted)", maxWidth: 640 }}>{"系统性地带你掌握 AI 编程和 Vibe Coding 的完整流程。"}</p>
         </div>
         <div ref={sr.ref} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {chapters.map((ch, i) => (

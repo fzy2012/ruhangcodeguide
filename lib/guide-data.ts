@@ -8,6 +8,7 @@ export interface GuideSubsection {
 export interface GuideSection {
   id: string
   title: string
+  emoji: string
   summary: string
   order: number
   key_points: string[]
@@ -18,6 +19,7 @@ export const guideData: GuideSection[] = [
   {
     id: "methodology",
     title: "方法论与原则",
+    emoji: "📐",
     summary: "AI 辅助编程的核心方法论，帮助你建立系统化的编程思维。",
     order: 1,
     key_points: [],
@@ -72,6 +74,7 @@ export const guideData: GuideSection[] = [
   {
     id: "templates",
     title: "模板与资源",
+    emoji: "📋",
     summary: "可复用的代码架构模板、工具集与书单推荐。",
     order: 2,
     key_points: [],
@@ -101,6 +104,7 @@ export const guideData: GuideSection[] = [
   {
     id: "coding-prompts",
     title: "编程提示词",
+    emoji: "💬",
     summary: "精选的 AI 编程提示词，覆盖架构设计、代码质量、任务分解等场景。",
     order: 3,
     key_points: [],

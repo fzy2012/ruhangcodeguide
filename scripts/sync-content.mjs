@@ -125,6 +125,7 @@ function syncGuide() {
       (s) => `  {
     id: ${JSON.stringify(s.id)},
     title: ${JSON.stringify(s.title)},
+    emoji: ${JSON.stringify(s.emoji ?? "")},
     summary: ${JSON.stringify(s.summary ?? "")},
     order: ${s.order ?? 0},
     key_points: ${renderKeyPoints(s.key_points)},
@@ -143,6 +144,7 @@ export interface GuideSubsection {
 export interface GuideSection {
   id: string
   title: string
+  emoji: string
   summary: string
   order: number
   key_points: string[]

@@ -6,13 +6,10 @@ import { useParams } from "next/navigation"
 
 const API = "https://ruhangcodeguide.ruhang365.cn/api"
 
-const chapters = [
-  { id: "introduction", title: "什么是 AI 编程", order: 1 },
-  { id: "getting-started", title: "如何开始", order: 2 },
-  { id: "prompting", title: "提示词技巧", order: 3 },
-  { id: "project-setup", title: "项目架构", order: 4 },
-  { id: "debugging", title: "调试与问题解决", order: 5 },
-  { id: "advanced", title: "进阶技巧", order: 6 },
+const defaultChapters = [
+  { id: "methodology", title: "方法论与原则", order: 1 },
+  { id: "templates", title: "模板与资源", order: 2 },
+  { id: "coding-prompts", title: "编程提示词", order: 3 },
 ]
 
 function escapeHtml(t: string) { return t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") }
@@ -54,6 +51,15 @@ export default function GuideDetailPage() {
   const id = params.id as string
   const [section, setSection] = useState<Section | null>(null)
   const [loading, setLoading] = useState(true)
+  const [chapters, setChapters] = useState(defaultChapters)
+
+  useEffect(() => {
+    fetch(`${API}/guide`).then(r => r.json()).then(json => {
+      if (json.success && Array.isArray(json.data)) {
+        setChapters(json.data.sort((a: { order: number }, b: { order: number }) => a.order - b.order))
+      }
+    }).catch(() => {})
+  }, [])
 
   useEffect(() => {
     setLoading(true)
