@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server"
-import { guideSections } from "@/lib/guide-data"
+import { guideData } from "@/lib/guide-data"
 
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params
-  const section = guideSections.find((s) => s.id === id)
+  const section = guideData.find((s) => s.id === id)
 
   if (!section) {
     return NextResponse.json(
