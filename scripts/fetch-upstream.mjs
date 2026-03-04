@@ -10,6 +10,7 @@
 import { writeFileSync } from "fs"
 import { resolve, dirname } from "path"
 import { fileURLToPath } from "url"
+import { execSync } from "child_process"
 import yaml from "js-yaml"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -49,31 +50,35 @@ const GUIDE_SECTIONS = [
 
 // ─── 工具函数 ────────────────────────────────────────────────────────────────
 
-async function apiGet(path) {
-  const headers = {
-    Accept: "application/vnd.github.v3+json",
-    "User-Agent": "ruhangcodeguide-sync/1.0",
-  }
-  if (process.env.GITHUB_TOKEN) {
-    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
-  }
-  const url = `${API_BASE}/${path}`
-  const res = await fetch(url, { headers })
-  if (!res.ok) {
-    throw new Error(`GitHub API ${res.status}: ${url}`)
-  }
-  return res.json()
+/** 用 curl 发 GET 请求，返回字符串响应体（兼容沙箱环境） */
+function curlGet(url, extraHeaders = []) {
+  const headerArgs = [
+    `-H "User-Agent: ruhangcodeguide-sync/1.0"`,
+    ...extraHeaders.map((h) => `-H "${h}"`),
+  ].join(" ")
+  const cmd = `curl -sL --max-time 30 ${headerArgs} "${url}"`
+  return execSync(cmd, { encoding: "utf-8", maxBuffer: 10 * 1024 * 1024 })
 }
 
-async function fetchRaw(repoPath) {
+function apiGet(path) {
+  const headers = ["Accept: application/vnd.github.v3+json"]
+  if (process.env.GITHUB_TOKEN) {
+    headers.push(`Authorization: Bearer ${process.env.GITHUB_TOKEN}`)
+  }
+  const encoded = path
+    .split("/")
+    .map((seg) => encodeURIComponent(seg))
+    .join("/")
+  const body = curlGet(`${API_BASE}/${encoded}`, headers)
+  return JSON.parse(body)
+}
+
+function fetchRaw(repoPath) {
   const encoded = repoPath
     .split("/")
     .map((seg) => encodeURIComponent(seg))
     .join("/")
-  const url = `${RAW_BASE}/${encoded}`
-  const res = await fetch(url)
-  if (!res.ok) throw new Error(`Raw fetch ${res.status}: ${url}`)
-  return res.text()
+  return curlGet(`${RAW_BASE}/${encoded}`)
 }
 
 /** 从文件名生成稳定的 kebab-case ID */
@@ -130,27 +135,21 @@ function extractSummary(content) {
 
 // ─── 核心逻辑 ────────────────────────────────────────────────────────────────
 
-async function listMdFiles(dirPath) {
-  // GitHub API 路径不需要对整体 URL 编码，只对各段即可
-  const apiPath = dirPath
-    .split("/")
-    .map((seg) => encodeURIComponent(seg))
-    .join("/")
-
-  const items = await apiGet(apiPath)
+function listMdFiles(dirPath) {
+  const items = apiGet(dirPath)
   return items.filter(
     (item) => item.type === "file" && item.name.endsWith(".md") && !SKIP_FILES.has(item.name)
   )
 }
 
-async function buildSection(meta, order) {
+function buildSection(meta, order) {
   console.log(`\n  [${meta.title}]`)
-  const files = await listMdFiles(meta.path)
+  const files = listMdFiles(meta.path)
   const subsections = []
 
   for (const file of files) {
     console.log(`    ← ${file.name}`)
-    const content = await fetchRaw(`${meta.path}/${file.name}`)
+    const content = fetchRaw(`${meta.path}/${file.name}`)
     subsections.push({
       id: toId(file.name),
       title: extractTitle(content, file.name),
@@ -169,12 +168,12 @@ async function buildSection(meta, order) {
   }
 }
 
-async function main() {
+function main() {
   console.log("Fetching upstream content from", UPSTREAM)
 
   const guide = []
   for (let i = 0; i < GUIDE_SECTIONS.length; i++) {
-    const section = await buildSection(GUIDE_SECTIONS[i], i + 1)
+    const section = buildSection(GUIDE_SECTIONS[i], i + 1)
     guide.push(section)
     console.log(`    ✓ ${section.subsections.length} subsections`)
   }
@@ -189,7 +188,9 @@ async function main() {
   console.log(`\n✓ guide.yaml updated — ${guide.length} sections, ${total} subsections`)
 }
 
-main().catch((err) => {
+try {
+  main()
+} catch (err) {
   console.error("\nfetch-upstream failed:", err.message)
   process.exit(1)
-})
+}
