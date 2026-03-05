@@ -4,17 +4,23 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 
-const API = "https://ruhangcodeguide.ruhang365.cn/api"
+const API = "/api"
 
 const defaultChapters = [
-  { id: "methodology", title: "方法论与原则", order: 1 },
-  { id: "templates", title: "模板与资源", order: 2 },
-  { id: "coding-prompts", title: "编程提示词", order: 3 },
+  { id: "introduction", title: "什么是 AI 编程", order: 1 },
+  { id: "getting-started", title: "如何开始", order: 2 },
+  { id: "prompting", title: "提示词技巧", order: 3 },
+  { id: "project-setup", title: "项目架构", order: 4 },
+  { id: "debugging", title: "调试与问题解决", order: 5 },
+  { id: "advanced", title: "进阶技巧", order: 6 },
+  { id: "methodology", title: "方法论与原则", order: 7 },
+  { id: "templates", title: "模板与资源", order: 8 },
+  { id: "coding-prompts", title: "编程提示词", order: 9 },
 ]
 
 function escapeHtml(t: string) { return t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") }
 function renderMd(md: string) {
-  let h = md
+  let h = md || ""
   h = h.replace(/```(\w*)\n([\s\S]*?)```/g, (_m, _l, c) => `<pre style="background:hsl(222 47% 4%);border:1px solid var(--border);border-radius:12px;padding:16px 20px;overflow-x:auto;margin:16px 0;font-family:var(--font-mono);font-size:0.85rem;line-height:1.6;color:var(--fg)"><code>${escapeHtml(c.trim())}</code></pre>`)
   h = h.replace(/`([^`]+)`/g, '<code style="background:var(--secondary);color:var(--primary);padding:1px 6px;border-radius:4px;font-family:var(--font-mono);font-size:0.85em">$1</code>')
   h = h.replace(/^### (.+)$/gm, '<h3 style="font-size:1.1rem;font-weight:600;color:var(--fg);margin:20px 0 8px">$1</h3>')

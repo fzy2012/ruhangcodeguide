@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 
-const API = "https://ruhangcodeguide.ruhang365.cn/api"
+const API = "/api"
 
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null)
