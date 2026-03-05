@@ -17,65 +17,11 @@ export interface GuideSection {
 
 export const guideData: GuideSection[] = [
   {
-    id: "introduction",
-    title: "什么是 AI 编程",
-    emoji: "🤖",
-    summary: "了解 AI 编程和 Vibe Coding 的概念，以及它们如何改变我们编写代码的方式。",
-    order: 1,
-    key_points: ["AI 编程通过自然语言描述需求，降低编码门槛","Vibe Coding 让开发者专注架构和产品，而非语法细节","主流工具包括 Claude Code、Cursor、GitHub Copilot 等"],
-    subsections: [],
-  },
-  {
-    id: "getting-started",
-    title: "如何开始",
-    emoji: "🚀",
-    summary: "根据你的技术背景，选择最适合的入门工具和学习路径。",
-    order: 2,
-    key_points: ["根据技术背景选择合适的工具：零基础用 Claude.ai，有基础用 Cursor","从简单项目开始，如个人主页或待办事项应用","环境搭建：Node.js + 支持 AI 的编辑器 + AI 服务账号"],
-    subsections: [],
-  },
-  {
-    id: "prompting",
-    title: "提示词技巧",
-    emoji: "💬",
-    summary: "学习如何编写高质量的提示词，让 AI 更好地理解你的需求。",
-    order: 3,
-    key_points: ["好的提示词包含上下文、目标、约束三要素","复杂任务要分步骤，避免一次性要求过多","迭代追问比一次完美提问更有效"],
-    subsections: [],
-  },
-  {
-    id: "project-setup",
-    title: "项目架构",
-    emoji: "🏗️",
-    summary: "学习如何组织你的 AI 编程项目，包括前后端分离、代码规范等。",
-    order: 4,
-    key_points: ["推荐新手使用 Next.js + Tailwind CSS + Vercel 技术栈","良好的目录结构让 AI 更容易理解和修改代码","CLAUDE.md 文件帮助 Claude Code 理解项目上下文"],
-    subsections: [],
-  },
-  {
-    id: "debugging",
-    title: "调试与问题解决",
-    emoji: "🐛",
-    summary: "当 AI 生成的代码出现问题时，如何有效地调试和修复。",
-    order: 5,
-    key_points: ["把完整的错误信息和相关代码提供给 AI，而不只是描述症状","让 AI 解释修复原因，帮助你真正理解问题","当 AI 多次失败时，考虑换一种技术方案"],
-    subsections: [],
-  },
-  {
-    id: "advanced",
-    title: "进阶技巧",
-    emoji: "⚡",
-    summary: "深入了解 MCP、A2A 等新技术，以及如何创建自己的 AI 编程代理。",
-    order: 6,
-    key_points: ["MCP 协议让 AI 能安全访问文件、数据库和外部 API","A2A 协议支持多个 AI 代理协作完成复杂任务","使用 Claude API 可以构建自定义的 AI 代理应用"],
-    subsections: [],
-  },
-  {
     id: "methodology",
     title: "方法论与原则",
     emoji: "📐",
     summary: "AI 辅助编程的核心方法论，帮助你建立系统化的编程思维。",
-    order: 7,
+    order: 1,
     key_points: [],
     subsections: [
       {
@@ -130,7 +76,7 @@ export const guideData: GuideSection[] = [
     title: "模板与资源",
     emoji: "📋",
     summary: "可复用的代码架构模板、工具集与书单推荐。",
-    order: 8,
+    order: 2,
     key_points: [],
     subsections: [
       {
@@ -160,7 +106,7 @@ export const guideData: GuideSection[] = [
     title: "编程提示词",
     emoji: "💬",
     summary: "精选的 AI 编程提示词，覆盖架构设计、代码质量、任务分解等场景。",
-    order: 9,
+    order: 3,
     key_points: [],
     subsections: [
       {
