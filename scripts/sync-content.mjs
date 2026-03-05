@@ -99,7 +99,17 @@ ${items},
 
 // ── guide ──────────────────────────────────────────────────────────────
 function syncGuide() {
-  const sections = readYaml("guide.yaml")
+  // Merge local chapters (guide-local.yaml) first, then upstream (guide.yaml).
+  // guide-local.yaml is never overwritten by the upstream sync script.
+  const localSections = readYaml("guide-local.yaml")
+  const upstreamSections = readYaml("guide.yaml")
+  // Assign upstream sections order starting after local ones
+  const localCount = localSections.length
+  const upstreamWithOrder = upstreamSections.map((s, i) => ({
+    ...s,
+    order: localCount + i + 1,
+  }))
+  const sections = [...localSections, ...upstreamWithOrder]
 
   function renderSubsections(subsections) {
     if (!subsections?.length) return "[]"
@@ -127,6 +137,7 @@ function syncGuide() {
     title: ${JSON.stringify(s.title)},
     emoji: ${JSON.stringify(s.emoji ?? "")},
     summary: ${JSON.stringify(s.summary ?? "")},
+    content: ${JSON.stringify(s.content ?? "")},
     order: ${s.order ?? 0},
     key_points: ${renderKeyPoints(s.key_points)},
     subsections: ${renderSubsections(s.subsections)},
@@ -146,6 +157,7 @@ export interface GuideSection {
   title: string
   emoji: string
   summary: string
+  content: string
   order: number
   key_points: string[]
   subsections: GuideSubsection[]
